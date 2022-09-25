@@ -1,3 +1,6 @@
+# bomb自动本地化
+
+
 `safebomb.py`可以将bomb自动本地化
 使用方式：
 将`safebomb.py`与`bomb`放在同一个文件下，运行
@@ -12,4 +15,4 @@ $ python3 ./safebomb.py
 ```bash
 $ sudo chomd 775 ./safebomb
 ```
-`safebomb.py`在这里：
+`safebomb.py`在这里：[https://github.com/Toseic/ICS_lab/blob/main/bomblab/safebomb.py](https://github.com/Toseic/ICS_lab/blob/main/bomblab/safebomb.py)

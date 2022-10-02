@@ -13,6 +13,6 @@ $ python3 ./safebomb.py
 生成的`safebomb`如果运行显示权限不够，可以运行：
 
 ```bash
-$ sudo chomd 775 ./safebomb
+$ sudo chmod 775 ./safebomb
 ```
 `safebomb.py`在这里：[https://github.com/Toseic/ICS_lab/blob/main/bomblab/safebomb.py](https://github.com/Toseic/ICS_lab/blob/main/bomblab/safebomb.py)

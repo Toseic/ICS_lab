@@ -1,0 +1,74 @@
+
+	.pos 0
+	irmovq stack, %rsp
+    call main 
+    halt
+
+
+.align 8
+Array:
+        .quad 0xbca
+        .quad 0xcba
+        .quad 0xacb
+        .quad 0xcab
+        .quad 0xabc
+        .quad 0xbac
+
+main:
+    irmovq Array,%rdi
+    irmovq $0x30,%rsi
+    call bubble_sort
+    ret
+
+bubble_sort:
+    rrmovq %rdi,%r10 # %r10 -> *last
+    addq %rsi,%r10
+    irmovq $0x8,%rbp
+    subq %rbp,%r10
+    # halt
+    jmp L1_init
+
+L1_init:
+    rrmovq %rdi,%r13   # %r13 -> i
+L1:
+    mrmovq (%r13),%r14 # (*i)
+    mrmovq 0x8(%r13),%rbx # (*(i+1))->t
+    subq %rbx,%r14
+    jle L3
+    # irmovq $0xfffffffff,%rbp #dbg
+    # pushq %rbp #dbg
+    
+    mrmovq (%r13),%r14 # (*i)
+    # pushq %r14 #dbg
+    # pushq %rbx #dbg
+    rmmovq %r14,0x8(%r13)
+    rmmovq %rbx,(%r13)
+    # mrmovq (%r13),%r14 # (*i) dbg
+    # mrmovq 0x8(%r13),%rbx # (*(i+1))->t dbg
+    # pushq %r14 #dbg
+    # pushq %rbx #dbg  
+
+
+L3:
+    # irmovq $0xfff,%rbp #dbg
+    # pushq %rbp #dbg
+    irmovq $0x8,%rbp
+    addq %rbp,%r13
+    rrmovq %r10,%r14  # last
+    subq %r13,%r14
+    jg L1
+
+L2:
+    # irmovq $0xffff,%rbp #dbg
+    # rrmovq %r10,%r13 #dbg
+    # pushq %rbp #dbg
+    irmovq $0x8,%rbp
+    subq %rbp,%r10
+    rrmovq %r10,%r12
+    subq %rdi,%r12
+    jg L1_init
+    ret
+
+
+	.pos 0x200
+stack:
